@@ -18,6 +18,14 @@ func handler(c *gin.Context) {
 
 var db []string
 
+
+// type database struct {
+// 	db []string
+// }
+
+// func (d *database) callDB() []string{
+// 	return d.db
+// }
 // type database struct {
 // 	db []string
 // }

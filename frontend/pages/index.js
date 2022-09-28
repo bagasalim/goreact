@@ -20,8 +20,11 @@ export default function Home() {
 
   return (
     <div>
+      <div>
+        <h1 className="text-center  mb-4 text-yellow-200 text-3xl">Connect Go with React using Rest API</h1>
+      </div>
       {error && <div>Failed to load {error.toString()}</div>}
-      {!data ? <div>Loading...</div> : (data?.data ?? []).length === 0 && <p>Data Kosong</p>}
+      {!data ? <div className="text-center text-amber-400">Loading...</div> : (data?.data ?? []).length === 0 && <p className="text-center text-amber-400">Data Kosong</p>}
       <Input onSuccess={getData} />
       {data?.data && data?.data?.map((item, index) => <p key={index}>{item}</p>)}
     </div>
@@ -56,9 +59,9 @@ function Input({ onSuccess }) {
     <div>
       {error && <p>error: {error.toString()}</p>}
       {data && <p>success: {data}</p>}
-      <form onSubmit={handleSubmit}>
-        <input name="data" type="text" />
-        <button>Submit</button>
+      <form className="text-center text-amber-400" onSubmit={handleSubmit}>
+        <input className="rounded-md" name="data" type="text" />
+        <button className="ml-1">Submit</button>
       </form>
     </div>
   );
