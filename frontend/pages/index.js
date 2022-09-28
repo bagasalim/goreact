@@ -39,7 +39,8 @@ function Input({ onSuccess }) {
       text: formData.get("data"),
     };
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/send`, {
+      console.log(process.env.NEXT_PUBLIC_BACKEND);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/send`, {
         method: "POST",
         body: JSON.stringify(body),
       });
