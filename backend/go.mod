@@ -1,4 +1,4 @@
-module github.com/bagasalim/golangreact
+module github.com/bagasalim/goreact
 
 go 1.19
 
