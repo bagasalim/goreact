@@ -10,7 +10,7 @@ export default function Home() {
   console.log(data?.data);
   const getData = async () => {
     try {
-      const res = await fetch(process.env.NEXT_PUBLIC_BACKEND_URL);
+      const res = await fetch(process.env.NEXT_PUBLIC_BACKEND);
       const data = await res.json();
       setData(data);
     } catch (error) {
@@ -21,12 +21,20 @@ export default function Home() {
   return (
     <div>
       <div>
-        <h1 className="text-center  mb-4 text-yellow-200 text-3xl">Connect Go with React using Rest API</h1>
+        <h1 className="text-center  mb-4 text-yellow-200 text-3xl">What is Your Main Focus for Today?</h1>
       </div>
       {error && <div>Failed to load {error.toString()}</div>}
       {!data ? <div className="text-center text-amber-400">Loading...</div> : (data?.data ?? []).length === 0 && <p className="text-center text-amber-400">Data Kosong</p>}
       <Input onSuccess={getData} />
-      {data?.data && data?.data?.map((item, index) => <p key={index}>{item}</p>)}
+      {data?.data &&
+        data?.data?.map((item, index) => (
+          <div key={index}>
+            <span>
+              ID: {item.ID} task: {item.task}
+            </span>
+            <input type="checkbox" defaultChecked={item.done} />
+          </div>
+        ))}
     </div>
   );
 }
@@ -37,12 +45,12 @@ function Input({ onSuccess }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.currenTarget);
+    const formData = new FormData(e.currentTarget);
     const body = {
-      text: formData.get("data"),
+      task: formData.get("data"),
     };
+
     try {
-      console.log(process.env.NEXT_PUBLIC_BACKEND);
       const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/send`, {
         method: "POST",
         body: JSON.stringify(body),
